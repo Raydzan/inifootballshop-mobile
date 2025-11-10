@@ -1,49 +1,38 @@
-1. Jelaskan apa itu widget tree pada Flutter dan 
-bagaimana hubungan parent-child (induk-anak) bekerja antar widget.
+1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement() pada Flutter. 
+Dalam kasus apa sebaiknya masing-masing digunakan pada aplikasi Football Shop kamu?
 
-widget tree adalah susunan hierarki semua widget di layar. 
-setiap widget (child) berada di dalam widget lain (parent).
-constraint - down, size - up, paint - down.
+Navigator.push() menambahkan halaman baru ke atas stack navigasi. Halaman sebelumnya tetap 
+ada sehingga pengguna bisa kembali dengan tombol back.Navigator.push() menambahkan halaman baru
+ke atas stack navigasi. Halaman sebelumnya tetap ada sehingga pengguna bisa kembali dengan tombol back.
 
-2. Sebutkan semua widget yang kamu gunakan 
-dalam proyek ini dan jelaskan fungsinya.
+Navigator.pushReplacement() mengganti halaman yang sedang ditampilkan dengan halaman baru. 
+Halaman sebelumnya di-remove dari stack sehingga tidak bisa kembali ke halaman lama dengan back.
+contohnya, halaman tidak menumpuk ketika pengguna berpindah-pindah antara “Halaman Utama” dan “Tambah Produk”
 
-materialApp – root aplikasi Material Design
-scaffold – kerangka halaman 
-appBar – header judul
-center / Padding / ConstrainedBox – memusatkan, memberi jarak, dan membatasi lebar konten
-column & Wrap – menyusun widget secara vertikal
-card – panel info dengan elevasi
-text – menampilkan teks (judul, label)
-sizedBox – mengatur lebar/tinggi tetap 
-elevatedButton & Icon – tombol berikon
-snackBar + ScaffoldMessenger – menampilkan pesan
+2. Bagaimana kamu memanfaatkan hierarchy widget seperti Scaffold, AppBar, dan Drawer untuk 
+membangun struktur halaman yang konsisten di seluruh aplikasi?
 
-3. Apa fungsi dari widget MaterialApp? 
-Jelaskan mengapa widget ini sering digunakan sebagai widget root.
+Saya menggunakan Scaffold sebagai kerangka utama setiap halaman agar struktur halaman konsisten. Di dalam Scaffold saya menambahkan:
+appBar: AppBar() untuk menampilkan judul aplikasi dan identitas (misalnya nama/NPM/kelas),
+drawer: const LeftDrawer() untuk menyediakan navigasi samping ke halaman-halaman penting (Halaman Utama dan Tambah Produk),
+body: untuk isi halaman (misalnya grid menu atau form produk).
 
-karena fungsi tersebut sebagai navigator dan route bawaan, tema Material (ThemeData), ikon, teks, animasi standar, dsb
+3. Bagaimana kamu memanfaatkan hierarchy widget seperti 
+Scaffold, AppBar, dan Drawer untuk membangun struktur halaman 
+yang konsisten di seluruh aplikasi?
 
-4. Jelaskan perbedaan antara StatelessWidget 
-dan StatefulWidget. Kapan kamu memilih salah satunya?
+Pada halaman form, saya membungkus isi form dengan SingleChildScrollView supaya form tetap bisa discroll ketika layar kecil atau keyboard muncul. 
+Tanpa scroll, form bisa overflow dan muncul error. Setiap TextFormField saya bungkus dengan Padding agar jarak antar field rapi dan mudah dibaca. Jika nanti jumlah field makin banyak atau ingin menampilkan daftar dinamis, widget seperti ListView juga cocok karena otomatis bisa discroll dan mengatur anak-anaknya secara vertikal
 
-statelessWidget: tidak punya state internal yang berubah, 
-UI murni dari input/konteks. cocok untuk kartu identitas, tombol menu statis
-statefulWidget: punya objek state + setState() untuk memicu rebuild saat data berubah
-pilih stateless kalau UInya tetap, pilih stateful kalau UI harus bereaksi terhadap perubahan data/waktu/interaksi
+4. Bagaimana kamu menyesuaikan warna tema agar 
+aplikasi Football Shop memiliki identitas visual yang konsisten dengan brand toko?
 
-5. Apa itu BuildContext dan mengapa penting di Flutter? 
-Bagaimana penggunaannya di metode build?
+Saya mengatur tema di MaterialApp dengan memberikan ThemeData dan ColorScheme.fromSeed() 
+menggunakan warna utama (misalnya biru/indigo) agar sesuai dengan identitas “Football Shop”
 
-buildContext adalah address sebuah widget di dalam tree
-Penting untuk lookup ke atas tree. di metode build(BuildContext context), 
-kita menggunakan context itu untuk membaca tema, 
-ukuran layar, navigator, hingga merender anak-anaknya
+5. 
 
-6. Jelaskan konsep "hot reload" di Flutter dan
-bagaimana bedanya dengan "hot restart".
 
-Hot reload: menyuntik perubahan kode ke VM tanpa reset state. 
-cepat untuk ubah UI/teks/layout, initState tidak dipanggil ulang.
-hot restart: reset seluruh state dan jalankan ulang dari main()
-lebih lambat dari reload, tapi berguna saat perubahan butuh inisialisasi ulang
+
+6. 
+

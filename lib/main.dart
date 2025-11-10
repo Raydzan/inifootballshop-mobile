@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'menu.dart';
+import 'widgets/left_drawer.dart';
+import 'product_form.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,6 +36,7 @@ class MyHomePage extends StatelessWidget {
         foregroundColor: Colors.white,
         elevation: 0,
       ),
+      drawer: const LeftDrawer(),
 
       body: Center(
         child: ConstrainedBox(

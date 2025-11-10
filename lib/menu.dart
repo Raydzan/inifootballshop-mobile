@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'product_form.dart';
 
 class MenuGrid extends StatelessWidget {
   final double tileWidth;
@@ -32,6 +33,12 @@ class MenuGrid extends StatelessWidget {
             icon: Icons.add_box,
             color: Colors.red,
             snackText: 'Kamu telah menekan tombol Create Product',
+            onPressedCustom: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProductFormPage()),
+              );
+            },
           ),
         ],
       ),
@@ -45,6 +52,7 @@ class MenuButton extends StatelessWidget {
   final IconData icon;
   final Color color;
   final String snackText;
+  final VoidCallback? onPressedCustom;
 
   const MenuButton({
     Key? key,
@@ -53,6 +61,7 @@ class MenuButton extends StatelessWidget {
     required this.icon,
     required this.color,
     required this.snackText,
+    this.onPressedCustom,
   }) : super(key: key);
 
   @override
@@ -66,7 +75,7 @@ class MenuButton extends StatelessWidget {
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         ),
-        onPressed: () {
+        onPressed: onPressedCustom ?? () {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(snackText)),
