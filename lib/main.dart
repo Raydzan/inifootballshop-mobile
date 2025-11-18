@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
-import 'menu.dart';
 import 'widgets/left_drawer.dart';
-import 'product_form.dart';
+import 'widgets/menu.dart';
+import 'screens/login_page.dart';          // <-- nanti kamu buat
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'IniFootballShop',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Provider(
+      create: (_) => CookieRequest(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'IniFootballShop',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const LoginPage(),
       ),
-      home: MyHomePage(),
     );
   }
 }
@@ -37,7 +43,6 @@ class MyHomePage extends StatelessWidget {
         elevation: 0,
       ),
       drawer: const LeftDrawer(),
-
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 720),
@@ -65,15 +70,16 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 SizedBox(height: 24),
                 Text(
                   'Selamat datang di IniFootballShop',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 24),
-
                 MenuGrid(tileWidth: kTileWidth),
               ],
             ),
@@ -92,15 +98,23 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 4),
-            Text(value, textAlign: TextAlign.center),
+            Text(
+              value,
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),

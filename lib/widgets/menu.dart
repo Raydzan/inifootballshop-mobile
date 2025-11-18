@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'product_form.dart';
+import '../screens/product_form.dart';
+import 'package:flutter/material.dart';
+import '../screens/product_form.dart';
+import '../screens/product_list.dart';
+import '../screens/all_products_page.dart';
 
 class MenuGrid extends StatelessWidget {
   final double tileWidth;
@@ -18,14 +22,26 @@ class MenuGrid extends StatelessWidget {
             label: 'All Products',
             icon: Icons.list_alt,
             color: Colors.blue,
-            snackText: 'Kamu telah menekan tombol All Products',
+            snackText: 'Membuka semua produk',
+            onPressedCustom: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AllProductsPage()),
+              );
+            },
           ),
           MenuButton(
             width: tileWidth,
             label: 'My Products',
             icon: Icons.inventory_2,
             color: Colors.green,
-            snackText: 'Kamu telah menekan tombol My Products',
+            snackText: 'Membuka produk saya',
+            onPressedCustom: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProductListPage()),
+              );
+            },
           ),
           MenuButton(
             width: tileWidth,
